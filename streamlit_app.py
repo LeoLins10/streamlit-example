@@ -1,120 +1,88 @@
-```python
-# Crie uma matriz de correspondência com as perguntas, opções de resposta e atributos de marca correspondentes
-correspondencia = [
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à aventura?",
-     "opcoes": ["Aventureira", "Conservadora", "Criativa", "Responsável"],
-     "atributo": "Aventureira"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à liderança?",
-     "opcoes": ["Animados", "Confiáveis", "Inspirados", "Seguros"],
-     "atributo": "Inspiradora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à inovação?",
-     "opcoes": ["Inovação", "Qualidade", "Sustentabilidade", "Tradição"],
-     "atributo": "Inovadora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à colaboração?",
-     "opcoes": ["Colaborativa", "Direta", "Empática", "Objetiva"],
-     "atributo": "Empática"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à modernidade?",
-     "opcoes": ["Moderna", "Sofisticada", "Tradicional", "Vibrante"],
-     "atributo": "Moderna"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à competição?",
-     "opcoes": ["Competitiva", "Cooperativa", "Inovadora", "Respeitosa"],
-     "atributo": "Competitiva"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à inspiração?",
-     "opcoes": ["Direta", "Divertida", "Inspiradora", "Persuasiva"],
-     "atributo": "Inspiradora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à sustentabilidade?",
-     "opcoes": ["Ativista", "Consciente", "Generosa", "Sustentável"],
-     "atributo": "Sustentável"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à disrupção?",
-     "opcoes": ["Arrojada", "Conservadora", "Disruptiva", "Tradicional"],
-     "atributo": "Disruptiva"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação ao carisma?",
-     "opcoes": ["Ambiciosa", "Carismática", "Forte", "Inspiradora"],
-     "atributo": "Carismática"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação aos detalhes?",
-     "opcoes": ["Detalhista", "Inovadora", "Precisa", "Tradicional"],
-     "atributo": "Detalhista"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à imaginação?",
-     "opcoes": ["Imaginativa", "Inovadora", "Moderna", "Tradicional"],
-     "atributo": "Imaginativa"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à consciência social?",
-     "opcoes": ["Consciente", "Inovadora", "Responsável", "Tradicional"],
-     "atributo": "Consciente"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à confiabilidade?",
-     "opcoes": ["Confiável", "Honesto", "Seguro", "
-     "atributo": "Confiável"}
+import pandas as pd
+import streamlit as st
+
+# Definir a tabela de correspondência
+correspondencia = {
+   "Lógico": [2, 0],
+    "Intuitivo": [1, 0],
+    "Dedicado": [0, 2],
+    "Flexível": [0, 1],
+    "Líder": [0, 2],
+    "Colaborativo": [1, 0],
+    "Criativo": [2, 1],
+    "Aventureiro": [1, 0],
+    "Planejador": [2, 0],
+    "Espontâneo": [1, 0],
+    "Comunicativo": [2, 0],
+    "Empático": [1, 1],
+    "Analítico": [2, 0],
+    "Assertivo": [0, 2],
+    "Resiliente": [2, 0],
+    "Tranquilo": [0, 1],
+    "Ambicioso": [2, 0],
+    "Equilibrado": [0, 1]
+}
+
+# Definir as perguntas e as opções de resposta
+perguntas = [
+    "Quando se trata de tomar decisões, você é mais:",
+    "Como você lida com desafios e adversidades?",
+    "Quando se trata de trabalhar em equipe, você é mais:",
+    "Quais são suas principais fontes de inspiração?",
+    "Como você lida com mudanças e incertezas?",
+    "Quando se trata de se comunicar com outras pessoas, você é mais:",
+    "Quais são suas principais habilidades?",
+    "Como você se relaciona com outras pessoas em seu ambiente pessoal e profissional?",
+    "Quando se trata de lidar com o estresse, você é mais:",
+    "Quais são suas principais motivações e objetivos na vida?"
 ]
 
-# Crie um dicionário para armazenar a pontuação de cada atributo de marca
-pontuacao = {}
-for item in correspondencia:
-    pontuacao[item["atributo"]] = 0
-
-# Faça as perguntas ao usuário e atribua pontos aos atributos de marca correspondentes
-for item in correspondencia:
-    print(item["pergunta"])
-    for i, opcao in enumerate(item["opcoes"]):
-        print(f"{i+1}. {opcao}")
-    resposta = int(input("Escolha uma opção: "))
-    atributo = item["atributo"]
-    pontuacao[atributo] += resposta
-
-# Determine o atributo de marca com a pontuação mais alta
-atributo_mais_alto = max(pontuacao, key=pontuacao.get)
-print(f"A personalidade da sua marca é {atributo_mais_alto}")
-
-
-# Crie uma matriz de correspondência com as perguntas, opções de resposta e atributos de marca correspondentes
-correspondencia = [
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à aventura?",
-     "opcoes": ["Aventureira", "Conservadora", "Criativa", "Responsável"],
-     "atributo": "Aventureira"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à liderança?",
-     "opcoes": ["Animados", "Confiáveis", "Inspirados", "Seguros"],
-     "atributo": "Inspiradora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à inovação?",
-     "opcoes": ["Inovação", "Qualidade", "Sustentabilidade", "Tradição"],
-     "atributo": "Inovadora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à colaboração?",
-     "opcoes": ["Colaborativa", "Direta", "Empática", "Objetiva"],
-     "atributo": "Empática"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à modernidade?",
-     "opcoes": ["Moderna", "Sofisticada", "Tradicional", "Vibrante"],
-     "atributo": "Moderna"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à competição?",
-     "opcoes": ["Competitiva", "Cooperativa", "Inovadora", "Respeitosa"],
-     "atributo": "Competitiva"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à inspiração?",
-     "opcoes": ["Direta", "Divertida", "Inspiradora", "Persuasiva"],
-     "atributo": "Inspiradora"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à tradição?",
-     "opcoes": ["Clássica", "Inovadora", "Luxuosa", "Tradicional"],
-     "atributo": "Tradicional"},
-    {"pergunta": "Qual dessas palavras melhor descreve a personalidade da sua marca em relação à autenticidade?",
-     "opcoes": ["Autêntica", "Criativa", "Elegante", "Simples"],
-     "atributo": "Autêntica"},
-    {"pergunta": "Qual dessas palavras melhor descreve a abordagem da sua marca em relação à sustentabilidade?",
-     "opcoes": ["Comprometida", "Inovadora", "Responsável", "Tradicional"],
-     "atributo": "Comprometida"}
+opcoes = [
+     ["Lógico e racional", "Intuitivo e emocional"],
+    ["Com determinação e perseverança", "Com flexibilidade e adaptabilidade"],
+    ["Líder e assertivo", "Colaborativo e cooperativo"],
+    ["Arte e cultura", "Natureza e aventura"],
+    ["Com resiliência e inovação", "Com segurança e estabilidade"],
+    ["Comunicativo e expressivo", "Empático e compreensivo"],
+    ["Criatividade e imaginação", "Análise e lógica"],
+    ["Sociável e extrovertido", "Reservado e introvertido"],
+    ["Resiliente e determinado", "Relaxado e tranquilo"],
+    ["Realização pessoal e profissional", "Conexão emocional e bem-estar"]
 ]
 
-# Crie um dicionário para armazenar a pontuação de cada atributo de marca e polo arquetípico
-pontuacao = {}
-for item in correspondencia:
-    pontuacao[item["atributo"]] = 0
-polos_arquetipicos = ["Herói", "Mago", "Explorador", "Fora da Lei", "Comediante", "Amante", "Rei", "Cuidador"]
+# Função para calcular os resultados com base nas respostas
+def calcular_resultados(respostas):
+    resultados = {}
+    for atributo in correspondencia:
+        resultados[atributo] = 0
+        for i, resposta in enumerate(respostas):
+            resultados[atributo] += correspondencia[atributo][int(resposta == "a")]
+    return resultados
 
-# Faça as perguntas ao usuário e atribua pontos aos atributos de marca e polos arquetípicos correspondentes
-for item in correspondencia:
-    print(item["pergunta"])
-    for i, opcao in enumerate(item["opcoes"]):
-        print(f"{i+1}. {opcao}")
-    resposta = int(input("Escolha uma opção: "))
-    atributo = item["atributo"]
-    pontuacao[atributo] += resposta
+# Aplicativo web interativo com Streamlit
+def main():
+    st.title("Questionário de Personalidade")
+    
+    # Criar um dicionário para armazenar as respostas
+    respostas = {}
+    
+    # Perguntar ao usuário todas as questões
+    for i, pergunta in enumerate(perguntas):
+        st.write(f"**Pergunta {i+1}:** {pergunta}")
+        opcao_selecionada = st.radio("", opcoes[i], key=i)
+        respostas[i] = "a" if opcao_selecionada == opcoes[i][0] else "b"
+    
+    # Calcular os resultados com base nas respostas
+    resultados = calcular_resultados(list(respostas.values()))
+    
+    # Exibir os resultados em uma tabela interativa
+    df_resultados = pd.DataFrame(list(resultados.items()), columns=["Atributo", "Pontuação"])
+    st.write("**Resultados:**")
+    st.dataframe(df_resultados)
 
-# Determine o atributo de marca com a pontuação mais alta e o polo arquetípico correspondente
-atributo_mais_alto = max(pontuacao, key=pontuacao.get)
-polo_arquetipico = polos_arquetipicos[pontuacao[atributo_mais_alto] % len(polos_arquetipicos)]
-print(f"A personalidade da sua marca é {atributo_mais_alto} e o polo arquetípico é {polo_arquetipico}")
-```
+    # Gerar a tabela de resultados em formato CSV
+    st.download_button("Download CSV", data=df_resultados.to_csv(index=False), file_name="resultados.csv")
+
+# Executar o aplicativo
+if __name__ == "__main__":
+    main()
