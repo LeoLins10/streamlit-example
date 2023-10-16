@@ -2,7 +2,7 @@ import streamlit as st
 
 # Banco de dados de grupos e afirmações
 grupos = {
-    'Grupo A  - Idealista': [
+    'Grupo A - Idealista': [
         "Abrimos mão do material para entender nossos valores",
         "Ainda acreditamos que é possível viver no paraíso",
         "Buscamos a paz e tranquilidade agora",
@@ -37,7 +37,7 @@ grupos = {
         "Somos disciplinados, focados e determinados",
         "Nos arriscamos para defender o mal contra a sociedade"
     ],
-    'Grupo E' - 'Rebelde': [
+    'Grupo E - Rebelde': [
         "Somos uma força disruptiva",
         "Desobediência é a nossa estratégia para a mudança",
         "Estamos sempre prontos para uma revolução",
@@ -122,10 +122,10 @@ grupos = {
 # Função para calcular a correspondência com os polos
 def calcular_correspondencia(respostas):
     polos = {
-        'Singularidade': ['Grupo D', 'Grupo F', 'Grupo K'],
-        'Liberdade': ['Grupo B', 'Grupo E', 'Grupo I'],
-        'Coletividade': ['Grupo G', 'Grupo H', 'Grupo J'],
-        'Regularidade': ['Grupo A', 'Grupo C', 'Grupo L']
+        'Singularidade': ['D', 'F', 'K'],
+        'Liberdade': ['B', 'E', 'I'],
+        'Coletividade': ['G', 'H', 'J'],
+        'Regularidade': ['A', 'C', 'L']
     }
     
     pontos_por_polo = {polo: 0 for polo in polos}
