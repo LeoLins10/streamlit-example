@@ -119,15 +119,16 @@ grupos = {
     ]
 }
 
+# Associação de grupos a polos
+polos = {
+    'Polo Singularidade': ['Grupo D - Valente', 'Grupo F - Alquimista', 'Grupo K - Artista'],
+    'Polo Liberdade': ['Grupo B - Caminhante', 'Grupo E - Rebelde', 'Grupo I - Comediante'],
+    'Polo Coletividade': ['Grupo G - Habitante', 'Grupo H - Entusiasta', 'Grupo J - Altruísta'],
+    'Polo Regularidade': ['Grupo A - Idealista', 'Grupo C - Sapiente', 'Grupo L - Regente']
+}
+
 # Função para calcular a correspondência com os polos
 def calcular_correspondencia(respostas):
-    polos = {
-        'Singularidade': ['D', 'F', 'K'],
-        'Liberdade': ['B', 'E', 'I'],
-        'Coletividade': ['G', 'H', 'J'],
-        'Regularidade': ['A', 'C', 'L']
-    }
-    
     pontos_por_polo = {polo: 0 for polo in polos}
     grupo_mais_escolhido = None
     maior_contagem = 0
@@ -135,7 +136,7 @@ def calcular_correspondencia(respostas):
     for grupo, respostas_grupo in respostas.items():
         for resposta in respostas_grupo:
             for polo, grupos_polo in polos.items():
-                if grupo[0] in grupos_polo:
+                if grupo in grupos_polo:
                     pontos_por_polo[polo] += 1
                     if pontos_por_polo[polo] > maior_contagem:
                         maior_contagem = pontos_por_polo[polo]
@@ -164,7 +165,7 @@ for grupo, afirmações in grupos.items():
     for afirmação in afirmações:
         resposta = st.checkbox(afirmação)
         if resposta:
-            respostas_grupo.append(afirmação)
+            respostas_grupo.append(grupo)
     
     if respostas_grupo:
         respostas[grupo] = respostas_grupo
