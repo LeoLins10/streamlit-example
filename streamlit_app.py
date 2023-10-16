@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Banco de dados de grupos e afirmações
 grupos = {
     'A - Idealista': [
@@ -39,23 +41,26 @@ def calcular_correspondencia(respostas):
 
 # Função para exibir resultados
 def exibir_resultados(pontos_por_polo, grupo_mais_escolhido):
-    print("Resultado da correspondência com os polos:")
+    st.subheader("Resultado da correspondência com os polos:")
     for polo, pontos in pontos_por_polo.items():
         porcentagem = (pontos / len(grupos)) * 100
-        print(f"{polo}: {porcentagem:.2f}%")
+        st.write(f"{polo}: {porcentagem:.2f}%")
     
-    print(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
+    st.write(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
+
+# Título do aplicativo
+st.title("Questionário Interativo")
 
 # Pergunte ao usuário
 respostas = {}
 
 for grupo, afirmações in grupos.items():
-    print(f"\n{grupo}")
+    st.header(grupo)
     respostas_grupo = []
     
     for afirmação in afirmações:
-        resposta = input(f"Você se identifica com a afirmação: '{afirmação}'? (S/N): ").strip().lower()
-        if resposta == 's':
+        resposta = st.radio(f"Você se identifica com a afirmação: '{afirmação}'?", ("Sim", "Não"))
+        if resposta == 'Sim':
             respostas_grupo.append(afirmação)
     
     respostas[grupo] = respostas_grupo
