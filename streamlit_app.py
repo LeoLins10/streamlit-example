@@ -2,7 +2,7 @@ import streamlit as st
 
 # Banco de dados de grupos e afirmações
 grupos = {
-    'Grupo A - Idealista': [
+    'Grupo A'  - 'Idealista': [
         "Abrimos mão do material para entender nossos valores",
         "Ainda acreditamos que é possível viver no paraíso",
         "Buscamos a paz e tranquilidade agora",
@@ -10,7 +10,7 @@ grupos = {
         "Gostamos de confiança",
         "Somos satisfeitos pela beleza e as maravilhas da vida"
     ],
-    'Grupo B - Caminhante': [
+    'Grupo B' - 'Caminhante': [
         "Não pertencemos a ninguém nem a lugar algum",
         "Gostamos de explorar experiências",
         "Vivemos em busca do melhor",
@@ -28,7 +28,7 @@ grupos = {
         "Acreditamos que a felicidade é resultado da educação",
         "Buscamos aprendizado e sabedoria"
     ],
-    'Grupo D - Valente': [
+    'Grupo D' - 'Valente': [
         "Também somos vistos como guerreiros",
         "Somos competitivos e competentes",
         "Protegemos valores e ideais",
@@ -37,7 +37,7 @@ grupos = {
         "Somos disciplinados, focados e determinados",
         "Nos arriscamos para defender o mal contra a sociedade"
     ],
-    'Grupo E - Rebelde': [
+    'Grupo E' - 'Rebelde': [
         "Somos uma força disruptiva",
         "Desobediência é a nossa estratégia para a mudança",
         "Estamos sempre prontos para uma revolução",
@@ -47,7 +47,7 @@ grupos = {
         "Também somos vistos como rebeldes, iconoclastas",
         "Quebramos regras por aventura"
     ],
-    'Grupo F - Alquimista': [
+    'Grupo F' - 'Alquimista': [
         "Transformamos sonhos em realidade",
         "Buscamos as leis fundamentais do universo",
         "Também somos vistos como shamans, bruxos, alquimistas, cientistas",
@@ -56,7 +56,7 @@ grupos = {
         "Somos catalisadores de transformação",
         "Gostamos do exótico, do antigo, do misterioso"
     ],
-    'Grupo G - Habitante': [
+    'Grupo G' - 'Habitante': [
         "Exaltamos as virtudes de ser comum",
         "Todos têm direitos, assim como nós e você",
         "Nos esforçamos apenas o suficiente para pertencer a um grupo",
@@ -65,7 +65,7 @@ grupos = {
         "Entendemos que o fundamento da democracia é o indivíduo",
         "Acreditamos que todos são importantes, exatamente como são"
     ],
-    'Grupo H - Entusiasta': [
+    'Grupo H' - 'Entusiasta': [
         "Buscamos a satisfação dos desejos pessoais",
         "Valorizamos todos os tipos de amor",
         "Ajudamos a tornar desejável, atraente",
@@ -75,7 +75,7 @@ grupos = {
         "Gostamos de uma relação profunda com o que amamos",
         "Desenvolvemos habilidades emocionais"
     ],
-    'Grupo I - Comediante': [
+    'Grupo I' - 'Comediante': [
         "Também somos vistos como comediantes, palhaços, travessos",
         "Somos a vida da festa",
         "Ajudamos a lidar com os absurdos do mundo moderno",
@@ -86,7 +86,7 @@ grupos = {
         "Sabemos que todos estão sedentos por mais diversão",
         "Somos brincalhões e espontâneos"
     ],
-    'Grupo J - Altruísta': [
+    'Grupo J' - 'Altruísta': [
         "Somos altruístas, movidos por compaixão e generosidade",
         "Nos identificamos com sentimentos maternais e paternais",
         "Temos consciência sobre a vulnerabilidade do ser humano",
@@ -95,7 +95,7 @@ grupos = {
         "Estamos mais preocupados com o bem estar alheio do que com o nosso",
         "Antecipamos as necessidades das pessoas"
     ],
-    'Grupo K - Artista': [
+    'Grupo K' - 'Artista': [
         "Autenticidade e curiosidade são a base da alma",
         "Adoramos o processo de descontruir e reconstruir",
         "Somos sonhadores, buscamos a imortalidade através das nossas criações",
@@ -106,7 +106,7 @@ grupos = {
         "Estruturamos experiência em uma obra de arte",
         "Criamos coisas com valores atemporais"
     ],
-    'Grupo L - Regente': [
+    'Grupo L' - 'Regente': [
         "Temos como objetivo tornar a vida estável e previsível",
         "Acreditamos que as coisas precisam ser duráveis",
         "Organizamos estruturas para entregar qualidade",
@@ -122,10 +122,10 @@ grupos = {
 # Função para calcular a correspondência com os polos
 def calcular_correspondencia(respostas):
     polos = {
-        'Singularidade': ['D', 'F', 'K'],
-        'Liberdade': ['B', 'E', 'I'],
-        'Coletividade': ['G', 'H', 'J'],
-        'Regularidade': ['A', 'C', 'L']
+        'Singularidade': ['Grupo D', 'Grupo F', 'Grupo K'],
+        'Liberdade': ['Grupo B', 'Grupo E', 'Grupo I'],
+        'Coletividade': ['Grupo G', 'Grupo H', 'Grupo J'],
+        'Regularidade': ['Grupo A', 'Grupo C', 'Grupo L']
     }
     
     pontos_por_polo = {polo: 0 for polo in polos}
