@@ -1,4 +1,3 @@
-import streamlit as st
 # Banco de dados de grupos e afirmações
 grupos = {
     'A - Idealista': [
