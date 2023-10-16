@@ -147,7 +147,7 @@ def calcular_correspondencia(respostas):
 def exibir_resultados(pontos_por_polo, grupo_mais_escolhido):
     st.subheader("Resultado da correspondência com os polos:")
     for polo, pontos in pontos_por_polo.items():
-        porcentagem = (pontos / len(grupos)) * 100
+        porcentagem = (pontos / len(respostas)) * 100
         st.write(f"{polo}: {porcentagem:.2f}%")
     
     st.write(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
