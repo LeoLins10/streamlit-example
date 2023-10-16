@@ -127,6 +127,22 @@ polos = {
     'Polo Regularidade': ['Grupo A - Idealista', 'Grupo C - Sapiente', 'Grupo L - Regente']
 }
 
+# Arquétipos
+arquetipos = {
+    'Idealista': 'Grupo A',
+    'Caminhante': 'Grupo B',
+    'Sapiente': 'Grupo C',
+    'Valente': 'Grupo D',
+    'Rebelde': 'Grupo E',
+    'Alquimista': 'Grupo F',
+    'Habitante': 'Grupo G',
+    'Entusiasta': 'Grupo H',
+    'Comediante': 'Grupo I',
+    'Altruísta': 'Grupo J',
+    'Artista': 'Grupo K',
+    'Regente': 'Grupo L'
+}
+
 # Função para calcular a correspondência com os polos
 def calcular_correspondencia(respostas):
     pontos_por_polo = {polo: 0 for polo in polos}
@@ -144,14 +160,28 @@ def calcular_correspondencia(respostas):
 
     return pontos_por_polo, grupo_mais_escolhido
 
+# Função para calcular o arquétipo
+def calcular_arquetipo(respostas):
+    escolhas = {}
+    
+    for grupo, respostas_grupo in respostas.items():
+        for resposta in respostas_grupo:
+            escolhas[grupo] = escolhas.get(grupo, 0) + 1
+    
+    grupo_mais_escolhido = max(escolhas, key=escolhas.get)
+    arquetipo = arquetipos.get(grupo_mais_escolhido, "Desconhecido")
+    
+    return arquetipo
+
 # Função para exibir resultados
-def exibir_resultados(pontos_por_polo, grupo_mais_escolhido):
+def exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo):
     st.subheader("Resultado da correspondência com os polos:")
     for polo, pontos in pontos_por_polo.items():
         porcentagem = (pontos / len(respostas)) * 100
         st.write(f"{polo}: {porcentagem:.2f}%")
     
     st.write(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
+    st.write(f"Arquétipo mais escolhido: {arquetipo}")
 
 # Título do aplicativo
 st.title("Questionário Interativo")
@@ -172,4 +202,5 @@ for grupo, afirmações in grupos.items():
 
 # Calcule a correspondência e exiba os resultados
 pontos_por_polo, grupo_mais_escolhido = calcular_correspondencia(respostas)
-exibir_resultados(pontos_por_polo, grupo_mais_escolhido)
+arquetipo = calcular_arquetipo(respostas)
+exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo)
