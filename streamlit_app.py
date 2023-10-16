@@ -163,7 +163,7 @@ for grupo, afirmações in grupos.items():
     respostas_grupo = []
     
     for afirmação in afirmações:
-        resposta = st.radio(f"Você se identifica com a afirmação: '{afirmação}'?", ("Sim", "Não"))
+        resposta = st.radio(f"'{afirmação}'", ("Sim", "Não"))
         if resposta == 'Sim':
             respostas_grupo.append(afirmação)
     
