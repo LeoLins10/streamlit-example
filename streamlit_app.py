@@ -1,55 +1,66 @@
 import streamlit as st
-
-# Dicionário de grupos e suas características
+# Banco de dados de grupos e afirmações
 grupos = {
-    "Grupo A - Idealista": ["Abrimos mão do material para entender nossos valores", "Ainda acreditamos que é possível viver no paraíso", "Buscamos a paz e tranquilidade agora"],
-    "Grupo B - Caminhante": ["Não pertencemos a ninguém nem a lugar algum", "Gostamos de explorar experiências", "Estamos sempre em movimento"],
-    "Grupo C - Sapiente": ["Buscamos experiências que nos fazem crescer", "Acreditamos que a felicidade é resultado da educação", "Buscamos aprendizado e sabedoria"],
-    "Grupo D - Valente": ["Somos competitivos e competentes", "Queremos fazer do mundo um lugar melhor", "Somos corajosos e cheios de energia"],
-    "Grupo E - Rebelde": ["Desobediência é a nossa estratégia para a mudança", "Violamos leis e normas em benefício do bem-estar alheio", "Quebramos regras por aventura"],
-    "Grupo F - Alquimista": ["Transformamos sonhos em realidade", "Gostamos de rituais, momentos simbólicos", "Trazemos magia e encantamento para a vida"],
-    "Grupo G - Habitante": ["Exaltamos as virtudes de ser comum", "Acreditamos que coisas e momentos bons é um direito de todos", "Acreditamos que todos são importantes, exatamente como são"],
-    "Grupo H - Entusiasta": ["Buscamos a satisfação dos desejos pessoais", "Valorizamos todos os tipos de amor", "Desenvolvemos habilidades emocionais"],
-    "Grupo I - Comediante": ["Somos a vida da festa", "Sabemos que é possível ser você mesmo e aceito pelos outros", "Somos brincalhões e espontâneos"],
-    "Grupo J - Altruísta": ["Somos altruístas, movidos por compaixão e generosidade", "Nos sacrificamos pelos outros", "Estamos mais preocupados com o bem-estar alheio do que com o nosso"],
-    "Grupo K - Artista": ["Autenticidade e curiosidade são a base da alma", "Temos espírito empreendedor, inconformado", "Gostamos de nos expressar em formas materiais"],
-    "Grupo L - Regente": ["Temos como objetivo tornar a vida estável e previsível", "Temos tudo sob controle", "Assumimos a liderança, somos responsáveis"]
+    'A - Idealista': [
+        "Abrimos mão do material para entender nossos valores",
+        "Ainda acreditamos que é possível viver no paraíso",
+        # Adicione as outras afirmações do Grupo A aqui
+    ],
+    'B - Caminhante': [
+        "Não pertencemos a ninguém nem a lugar algum",
+        "Gostamos de explorar experiências",
+        # Adicione as outras afirmações do Grupo B aqui
+    ],
+    # Adicione outros grupos aqui
 }
 
-# Dicionário de polos
-polos = {
-    "Polo Singularidade": ["Grupo D - Valente", "Grupo F - Alquimista", "Grupo K - Artista"],
-    "Polo Liberdade": ["Grupo B - Caminhante", "Grupo E - Rebelde", "Grupo I - Comediante"],
-    "Polo Coletividade": ["Grupo G - Habitante", "Grupo H - Entusiasta", "Grupo J - Altruísta"],
-    "Polo Regularidade": ["Grupo A - Idealista", "Grupo C - Sapiente", "Grupo L - Regente"]
-}
+# Função para calcular a correspondência com os polos
+def calcular_correspondencia(respostas):
+    polos = {
+        'Singularidade': ['D', 'F', 'K'],
+        'Liberdade': ['B', 'E', 'I'],
+        'Coletividade': ['G', 'H', 'J'],
+        'Regularidade': ['A', 'C', 'L']
+    }
+    
+    pontos_por_polo = {polo: 0 for polo in polos}
+    grupo_mais_escolhido = None
+    maior_contagem = 0
+    
+    for grupo, respostas_grupo in respostas.items():
+        for resposta in respostas_grupo:
+            for polo, grupos_polo in polos.items():
+                if grupo[0] in grupos_polo:
+                    pontos_por_polo[polo] += 1
+                    if pontos_por_polo[polo] > maior_contagem:
+                        maior_contagem = pontos_por_polo[polo]
+                        grupo_mais_escolhido = polo
 
-# Função para fazer uma pergunta e obter a resposta do usuário
-def fazer_pergunta(pergunta):
-    while True:
-        resposta = input(pergunta + " (Sim/Não): ").strip().lower()
-        if resposta in ["sim", "não"]:
-            return resposta
-        else:
-            print("Por favor, responda com 'Sim' ou 'Não'.")
+    return pontos_por_polo, grupo_mais_escolhido
 
-# Função para calcular o polo com base nas respostas
-def calcular_polo(respostas):
-    contador_polos = {"Polo Singularidade": 0, "Polo Liberdade": 0, "Polo Coletividade": 0, "Polo Regularidade": 0}
-    for grupo, perguntas in grupos.items():
-        for pergunta in perguntas:
-            resposta = fazer_pergunta(f"Você concorda com a afirmação: {pergunta}")
-            if resposta == "sim":
-                for polo, grupos_polo in polos.items():
-                    if grupo in grupos_polo:
-                        contador_polos[polo] += 1
+# Função para exibir resultados
+def exibir_resultados(pontos_por_polo, grupo_mais_escolhido):
+    print("Resultado da correspondência com os polos:")
+    for polo, pontos in pontos_por_polo.items():
+        porcentagem = (pontos / len(grupos)) * 100
+        print(f"{polo}: {porcentagem:.2f}%")
+    
+    print(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
 
-    polo_final = max(contador_polos, key=contador_polos.get)
-    return polo_final
+# Pergunte ao usuário
+respostas = {}
 
-# Perguntas e respostas
-polo_resultante = calcular_polo(polos)
+for grupo, afirmações in grupos.items():
+    print(f"\n{grupo}")
+    respostas_grupo = []
+    
+    for afirmação in afirmações:
+        resposta = input(f"Você se identifica com a afirmação: '{afirmação}'? (S/N): ").strip().lower()
+        if resposta == 's':
+            respostas_grupo.append(afirmação)
+    
+    respostas[grupo] = respostas_grupo
 
-# Exibir o resultado final
-print("\nVocê se encaixa no", polo_resultante)
-
+# Calcule a correspondência e exiba os resultados
+pontos_por_polo, grupo_mais_escolhido = calcular_correspondencia(respostas)
+exibir_resultados(pontos_por_polo, grupo_mais_escolhido)
