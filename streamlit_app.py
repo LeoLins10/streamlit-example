@@ -165,9 +165,8 @@ def calcular_arquetipo(respostas):
     escolhas_arquetipos = {arquetipo: 0 for arquetipo in arquetipos.values()}
 
     for grupo, respostas_grupo in respostas.items():
-        for arquetipo in arquetipos.values():
-            if grupo == arquetipo:
-                escolhas_arquetipos[arquetipo] += len(respostas_grupo)
+        arquetipo_grupo = arquetipos[grupo]
+        escolhas_arquetipos[arquetipo_grupo] += len(respostas_grupo)
 
     arquetipo_mais_escolhido = max(escolhas_arquetipos, key=escolhas_arquetipos.get)
     return arquetipo_mais_escolhido
