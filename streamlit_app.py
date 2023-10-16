@@ -127,20 +127,20 @@ polos = {
     'Polo Regularidade': ['Grupo A - Idealista', 'Grupo C - Sapiente', 'Grupo L - Regente']
 }
 
-# Arquétipos
+# Arquétipos associados a cada grupo
 arquetipos = {
-    'Idealista': 'Grupo A',
-    'Caminhante': 'Grupo B',
-    'Sapiente': 'Grupo C',
-    'Valente': 'Grupo D',
-    'Rebelde': 'Grupo E',
-    'Alquimista': 'Grupo F',
-    'Habitante': 'Grupo G',
-    'Entusiasta': 'Grupo H',
-    'Comediante': 'Grupo I',
-    'Altruísta': 'Grupo J',
-    'Artista': 'Grupo K',
-    'Regente': 'Grupo L'
+    'Grupo A - Idealista': 'Idealista',
+    'Grupo B - Caminhante': 'Caminhante',
+    'Grupo C - Sapiente': 'Sapiente',
+    'Grupo D - Valente': 'Valente',
+    'Grupo E - Rebelde': 'Rebelde',
+    'Grupo F - Alquimista': 'Alquimista',
+    'Grupo G - Habitante': 'Habitante',
+    'Grupo H - Entusiasta': 'Entusiasta',
+    'Grupo I - Comediante': 'Comediante',
+    'Grupo J - Altruísta': 'Altruísta',
+    'Grupo K - Artista': 'Artista',
+    'Grupo L - Regente': 'Regente'
 }
 
 # Função para calcular a correspondência com os polos
@@ -148,7 +148,7 @@ def calcular_correspondencia(respostas):
     pontos_por_polo = {polo: 0 for polo in polos}
     grupo_mais_escolhido = None
     maior_contagem = 0
-    
+
     for grupo, respostas_grupo in respostas.items():
         for resposta in respostas_grupo:
             for polo, grupos_polo in polos.items():
@@ -162,16 +162,15 @@ def calcular_correspondencia(respostas):
 
 # Função para calcular o arquétipo
 def calcular_arquetipo(respostas):
-    escolhas = {}
-    
+    escolhas_arquetipos = {arquetipo: 0 for arquetipo in arquetipos.values()}
+
     for grupo, respostas_grupo in respostas.items():
-        for resposta in respostas_grupo:
-            escolhas[grupo] = escolhas.get(grupo, 0) + 1
-    
-    grupo_mais_escolhido = max(escolhas, key=escolhas.get)
-    arquetipo = arquetipos.get(grupo_mais_escolhido, "Desconhecido")
-    
-    return arquetipo
+        for arquetipo in arquetipos.values():
+            if grupo == arquetipo:
+                escolhas_arquetipos[arquetipo] += len(respostas_grupo)
+
+    arquetipo_mais_escolhido = max(escolhas_arquetipos, key=escolhas_arquetipos.get)
+    return arquetipo_mais_escolhido
 
 # Função para exibir resultados
 def exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo):
@@ -179,7 +178,7 @@ def exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo):
     for polo, pontos in pontos_por_polo.items():
         porcentagem = (pontos / len(respostas)) * 100
         st.write(f"{polo}: {porcentagem:.2f}%")
-    
+
     st.write(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
     st.write(f"Arquétipo mais escolhido: {arquetipo}")
 
@@ -191,12 +190,12 @@ respostas = {}
 
 for grupo, afirmações in grupos.items():
     respostas_grupo = []
-    
+
     for afirmação in afirmações:
         resposta = st.checkbox(afirmação)
         if resposta:
             respostas_grupo.append(grupo)
-    
+
     if respostas_grupo:
         respostas[grupo] = respostas_grupo
 
