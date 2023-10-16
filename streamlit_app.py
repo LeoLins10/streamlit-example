@@ -201,4 +201,9 @@ for grupo, afirmações in grupos.items():
 # Calcule a correspondência e exiba os resultados
 pontos_por_polo, grupo_mais_escolhido = calcular_correspondencia(respostas)
 arquetipo = calcular_arquetipo(respostas)
-exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo)
+
+# Botão para exibir resultados
+if st.button("Enviar Respostas"):
+    # Exibe os resultados em uma nova janela
+    st.text_area("Suas respostas:", str(respostas))
+    exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo)
