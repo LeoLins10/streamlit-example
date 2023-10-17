@@ -182,7 +182,7 @@ def exibir_resultados(pontos_por_polo, grupo_mais_escolhido, arquetipo):
     st.write(f"Arquétipo mais escolhido: {arquetipo}")
 
 # Título do aplicativo
-st.title("Questionário Interativo")
+st.title("Descubra o seu arquétipo")
 
 # Pergunte ao usuário
 respostas = {}
