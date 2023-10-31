@@ -160,28 +160,17 @@ def calcular_correspondencia(respostas):
 
     return pontos_por_polo, grupo_mais_escolhido
 
-# Função para calcular o arquétipo
-def calcular_arquetipo(respostas):
-    escolhas_arquetipos = {arquetipo: 0 for arquetipo in arquetipos.values()}
-
+# Função para calcular os arquétipos mais escolhidos
+def calcular_arquetipos_mais_escolhidos(respostas):
+    arquetipos_contagem = {}
+    
     for grupo, respostas_grupo in respostas.items():
         arquetipo_grupo = arquetipos[grupo]
-        escolhas_arquetipos[arquetipo_grupo] += len(respostas_grupo)
-
-    arquetipo_mais_escolhido = max(escolhas_arquetipos, key=escolhas_arquetipos.get)
-    return arquetipo_mais_escolhido
-
-# Função para calcular os atributos mais escolhidos
-def calcular_atributos_mais_escolhidos(respostas):
-    atributos_contagem = {}
+        arquetipos_contagem[arquetipo_grupo] = arquetipos_contagem.get(arquetipo_grupo, 0) + len(respostas_grupo)
     
-    for grupo, respostas_grupo in respostas.items():
-        for resposta in respostas_grupo:
-            atributos_contagem[grupo] = atributos_contagem.get(grupo, 0) + 1
+    arquetipos_mais_escolhidos = dict(sorted(arquetipos_contagem.items(), key=lambda item: item[1], reverse=True)[:5])
     
-    atributos_mais_escolhidos = dict(sorted(atributos_contagem.items(), key=lambda item: item[1], reverse=True)[:5])
-    
-    return atributos_mais_escolhidos
+    return arquetipos_mais_escolhidos
 
 # Título do aplicativo
 st.title("Questionário Interativo")
@@ -204,10 +193,8 @@ for grupo, afirmações in grupos.items():
 if st.button("Calcular e Exibir Resultados"):
     # Calcule a correspondência
     pontos_por_polo, grupo_mais_escolhido = calcular_correspondencia(respostas)
-    # Calcule o arquétipo
-    arquetipo = calcular_arquetipo(respostas)
-    # Calcule os atributos mais escolhidos
-    atributos_mais_escolhidos = calcular_atributos_mais_escolhidos(respostas)
+    # Calcule os arquétipos mais escolhidos
+    arquetipos_mais_escolhidos = calcular_arquetipos_mais_escolhidos(respostas)
 
     # Exiba os resultados
     st.subheader("Resultado da correspondência com os polos:")
@@ -216,12 +203,7 @@ if st.button("Calcular e Exibir Resultados"):
         st.write(f"{polo}: {porcentagem:.2f}%")
 
     st.write(f"Grupo com mais afirmações escolhidas: {grupo_mais_escolhido}")
-    st.write(f"Arquétipo mais escolhido: {arquetipo}")
 
-    st.subheader("Atributos mais escolhidos:")
-    for atributo, contagem in atributos_mais_escolhidos.items():
-        st.write(f"{atributo}: {contagem}")
-
-# Exiba as respostas
-st.subheader("Suas respostas:")
-st.write(str(respostas))
+    st.subheader("Arquétipos mais escolhidos:")
+    for arquetipo, contagem in arquetipos_mais_escolhidos.items():
+        st.write(f"{arquetipo}: {contagem} afirmações escolhidas")
